@@ -1,4 +1,4 @@
-package it.polito.tdp.libretto.model;
+ package it.polito.tdp.libretto.model;
 
 import java.time.LocalDate;
 
@@ -41,9 +41,20 @@ public class TestLibretto {
 		System.out.println("Economia con 24 è duplicato: " + lib.isDuplicato(economia2)
 											+ " | è in conflitto: " + lib.isConflitto(economia2));
 		System.out.println("Economia con 21 è duplicato: " + lib.isDuplicato(economia3)
-											+ " | è in conflitto: " + lib.isConflitto(economia3));
+											+ " | è in conflitto: " + lib.isConflitto(economia3) + "\n");
 		
-		// 6. Modificare metodo add per evitare duplicati e conflitti ---> Fatto in classe libretto
+		// 6. Modificare metodo add per evitare duplicati e conflitti 
+		
+			// Fatto in classe libretto!
+		
+		// 7. Creare libretto migliorato
+		Libretto migliorato = lib.creaLibrettoMigliorato();
+		System.out.println("Libretto voti non-migliorato: ");
+		System.out.println(lib);
+		System.out.println("Libretto voti migliorato: ");
+		System.out.println(migliorato + "\n");
+		
+		
 	}
 
 	// Non si lavora dentro il metodo Static Main

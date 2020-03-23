@@ -26,6 +26,19 @@ public class Voto {
 		this.voto = voto;
 		this.data = data;
 	}
+	
+	/**
+	 * Copy constructor di {@link Voto}: crea un nuovo {@link Voto}, copiando 
+	 * il contenuto del parametro {@code v}.
+	 * @param v : il voto da copiare
+	 */
+	public Voto (Voto v) {
+		// con '=' sto condividendo il riferimento all'oggetto; String e Data sono immutabili quindi NO PROBLEM
+		this.corso = v.corso;	//v.getCorso() ma essendo della stessa classe si può semplificare!
+		this.data = v.data;
+		// int non è immutabile ma, essendo primitivo e non essendo un oggetto, l'Integer viene copiato e non 'puntato' 
+		this.voto = v.voto;
+	}
 
 	public String getCorso() {
 		return corso;

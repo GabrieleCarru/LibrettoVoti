@@ -129,4 +129,34 @@ public class Libretto {
 		return ( esiste.getVoto() != v.getVoto() );
 	}
 	
+	/**
+	 * Restituisce un nuovo {@link Libretto}, migliorando i voti del 
+	 * libretto attuale.
+	 * @return nuovo Libretto
+	 */
+	public Libretto creaLibrettoMigliorato() {
+		Libretto nuovo = new Libretto();
+		
+		for(Voto v : this.voti) {
+			
+			/* Sbagliato perchè non crea in v2 un nuovo oggetto uguale a v ma utilizza v, 
+				perdendo così l'oggetto v, e di conseguenza il libretto originale! 
+				
+				In altre parole: v2 punta allo stesso oggetto di v
+				
+				Voto v2 = v;
+			*/
+			Voto v2 = new Voto(v); 	// anzichè il 'copy constructor avrei potuto usare il metodo .clone()
+			
+			if(v2.getVoto() >= 24) {
+				v2.setVoto(v2.getVoto() + 2);
+				if(v2.getVoto() > 30) 
+					v2.setVoto(30);
+			} else if (v2.getVoto() >= 18) 
+				v2.setVoto(v2.getVoto() + 1);
+			
+			nuovo.add(v2);
+		}
+		return nuovo;
+	}
 }
