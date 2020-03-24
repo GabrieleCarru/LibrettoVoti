@@ -8,7 +8,7 @@ import java.time.LocalDate;
  *
  */
 
-public class Voto {
+public class Voto implements Comparable<Voto> {
 	
 	private String corso; // "Tecniche di Programmazione"
 	private int voto; // "28"
@@ -94,6 +94,22 @@ public class Voto {
 		return true;
 	}
 
+	public Voto clone() {
+		Voto v = new Voto(this.corso, this.voto, this.data);
+		return v;
+	}
+
+	@Override
+	public int compareTo(Voto other) {
+		/*
+		 * <0 se this < other
+		 * =0 se this = other 
+		 * >0 se this > other
+		 */
+		
+		return (this.corso.compareTo(other.corso)) ;
+	}
+	
 	
 
 }

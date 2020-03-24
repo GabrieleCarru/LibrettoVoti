@@ -17,6 +17,7 @@ public class TestLibretto {
 		lib.add(v1);
 		lib.add(v2);
 		lib.add(v3);
+		lib.add(new Voto("Fisica 2", 18, LocalDate.of(2019, 06, 18)));
 		
 		System.out.println("Libretto completo: ");
 		System.out.println(this.lib);
@@ -52,9 +53,24 @@ public class TestLibretto {
 		System.out.println("Libretto voti non-migliorato: ");
 		System.out.println(lib);
 		System.out.println("Libretto voti migliorato: ");
-		System.out.println(migliorato + "\n");
+		System.out.println(migliorato);
 		
+		// 8.1 Stampa in ordine alfabetico
+		Libretto alfabetico = new Libretto(lib);
+		alfabetico.ordinaPerCorso();
+		System.out.println("Libretto ordinato alfabeticamente: ");
+		System.out.println(alfabetico);
 		
+		// 8.2 Stampa in ordine decrescente di voto
+		Libretto votiDecrescenti = new Libretto(lib);
+		votiDecrescenti.ordinaPerVoto();
+		System.out.println("Libretto ordinato per voti decrescenti: ");
+		System.out.println(votiDecrescenti);
+		
+		// 9. Elimina dal libretto tutti i voti minori di 24
+		System.out.println("Libretto privato di voti inferiori a 24: ");
+		lib.cancellaVotiScarsi();
+		System.out.println(lib);
 	}
 
 	// Non si lavora dentro il metodo Static Main

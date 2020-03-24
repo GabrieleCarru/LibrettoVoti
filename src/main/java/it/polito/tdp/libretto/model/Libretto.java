@@ -1,6 +1,7 @@
 package it.polito.tdp.libretto.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -14,6 +15,25 @@ public class Libretto {
 
 	private List<Voto> voti = new ArrayList<>();
 
+	public Libretto() {
+		super();
+	}
+	
+	/**
+	 * Copy Constructor 
+	 * "Shallow" (copia superficiale).
+	 * Gli oggetti {@link Voto}  vengono condivisi e non copiati
+	 * @param l
+	 */
+	public Libretto(Libretto l) {
+		// IMPORTANTE: NEL MOMENTO IN CUI DEFINISCO UN COPY CONSTRUCTOR 
+		// DEVO DEFINIRE ANCHE UN COSTRUTTORE SEMPLICE PERCHE' JAVA NON è PIU' IN GRADO DI 
+		// FARLO AUTONOMAMENTE!
+		super();
+		this.voti.addAll(l.voti);
+	}
+	
+	
 	/**
 	 * Aggiunge un nuovo voto al libretto 
 	 * @param v : {@link Voto} da aggiungere
@@ -159,4 +179,48 @@ public class Libretto {
 		}
 		return nuovo;
 	}
+	
+	/**
+	 * Riordina i {@code voti} presenti nel libretto corrente
+	 * alfabeticamente.
+	 */
+	public void ordinaPerCorso() {
+		Collections.sort(this.voti);	// ORDINA LA LISTA IN ORDINE CRESCCENTE UTILIZZANDO L'ORDINAMENTO NATURALE
+	} 
+	
+	/**
+	 * Riordina i {code voti} presenti nel libretto corrente 
+	 * per voto. 
+	 */
+	public void ordinaPerVoto() {
+		Collections.sort(this.voti, new ConfrontaVotiPerValutazione()); 
+		// this.voti.sort(new ConfrontaVotiPerValutazione());  SAREBBE STATO UGUALE. FUNZIONA SOLO CON IL COMPARATORE, NO ORDINAMENTO NATURALE!
+	} 
+	
+	/**
+	 * Elimina dal libretto tutti i voti <24
+	 */
+	public void cancellaVotiScarsi() {
+		// NON POSSO MODIFICARE UNA LISTA SU CUI STO ITERANDO!!!
+//		for(Voto v : this.voti) {
+//			if(v.getVoto()<24) {
+//				this.voti.remove(v);
+//			}
+//		}
+		
+		// SI RISOLVE PRIMA CERCANDO GLI ELEMENTI DA CANCELLARE E POI SUCCESSIVAMENTE LI SI ELIMINA
+		List<Voto> daRimuovere = new ArrayList<>();
+		for(Voto v : this.voti) {
+			if(v.getVoto()<24) {
+				daRimuovere.add(v);
+			}
+		}
+		
+//		for(Voto v : daRimuovere) {
+//			this.voti.remove(v);	// NON C'E' PROBLEMA PERCHE' CICLO SU 'DARIMUOVERE' MA RIMUOVO DA 'THIS'
+//		}
+		
+		this.voti.removeAll(daRimuovere); 	//VERSIONE PIU' ELEGANTE DI QUANTO VISTO SU!
+	}
+
 }
